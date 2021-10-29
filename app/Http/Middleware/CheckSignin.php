@@ -18,8 +18,6 @@ class CheckSignin
     {
         $user = Session::get('user');
 
-        //dd($user);
-
         if ($user!=null) {
             return $next($request);
         }else{

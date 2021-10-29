@@ -30,7 +30,7 @@ class UsersController extends Controller
             return "error";
         } else {
             Session::put('user', $user);
-            return "ok";
+            return redirect("/productsByCategory/1");
         }
     }
 
@@ -42,6 +42,6 @@ class UsersController extends Controller
     public function logout()
     {
         Session::forget('user');
-        return "forget";
+        return redirect("/productsByCategory/1");
     }
 }

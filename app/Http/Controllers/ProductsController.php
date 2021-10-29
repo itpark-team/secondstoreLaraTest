@@ -11,6 +11,7 @@ class ProductsController extends Controller
     {
         $findProducts = DB::table('products')->where('category_id', '=', $id)->get();
 
+
         return view('products.getByCategoryId')->with('products', $findProducts);
     }
 }
