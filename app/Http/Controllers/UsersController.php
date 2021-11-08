@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -18,7 +19,7 @@ class UsersController extends Controller
         $login = $request->input('login');
         $password = $request->input('password');
 
-        $user = DB::table('users')->where(
+        $user = User::where(
             [
                 ['login', '=', $login],
                 ['password', '=', $password],
