@@ -3,7 +3,7 @@
     $user = Session::get('user');
 @endphp
 
-    <!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -16,6 +16,8 @@
 
     <script src="{{asset('vendor/bootstrap/js/jquery-3.6.0.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
+
+    <script src="{{asset('myjs/cart.js')}}"></script>
 
     <style>
         .bd-placeholder-img {
@@ -32,6 +34,8 @@
             }
         }
     </style>
+
+
 </head>
 <body>
 
@@ -53,7 +57,11 @@
                             <li><a href="/users/signin" class="text-white">Войти</a></li>
                         @else
                             <li><span class="text-white">{{$user->name}}, </span><a href="/users/logout" class="text-white">Выйти</a></li>
-                            <li><a href="/cart/view/{{$user->id}}" class="text-white">Корзина</a></li>
+                            <li><a href="/cart/view/{{$user->id}}" class="text-white">Корзина <span id="cartCountItems"></span></a></li>
+
+                            <script>
+                                getCountItemsByUserId({{$user->id}});
+                            </script>
                         @endif
 
                     </ul>
