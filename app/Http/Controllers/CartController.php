@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public function viewAllItemsByUserId($id){
-        $cartItems =  CartItem::where('user_id','=', $id)->get();
+    public function viewAllItemsForUser(){
+        $user = Session::get('user');
+        $userId = $user->id;
+
+        $cartItems =  CartItem::where('user_id','=', $userId)->get();
 
         return view('cart.viewAllItemsByUserId')->with('cartItems', $cartItems);
     }
@@ -30,7 +33,10 @@ class CartController extends Controller
         CartItem::destroy($id);
     }
 
-    public function getCountItemsByUserId($userId){
+    public function getCountItemsForUser(){
+        $user = Session::get('user');
+        $userId = $user->id;
+
         return CartItem::where('user_id','=',$userId)->count();
     }
 }

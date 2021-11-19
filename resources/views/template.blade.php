@@ -57,10 +57,10 @@
                             <li><a href="/users/signin" class="text-white">Войти</a></li>
                         @else
                             <li><span class="text-white">{{$user->name}}, </span><a href="/users/logout" class="text-white">Выйти</a></li>
-                            <li><a href="/cart/view/{{$user->id}}" class="text-white">Корзина <span id="cartCountItems"></span></a></li>
+                            <li><a href="/cart/view" class="text-white">Корзина <span id="cartCountItems"></span></a></li>
 
                             <script>
-                                getCountItemsByUserId({{$user->id}});
+                                getCountItemsByUserId();
                             </script>
                         @endif
 

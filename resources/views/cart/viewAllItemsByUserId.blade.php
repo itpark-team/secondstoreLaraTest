@@ -4,15 +4,14 @@
 @endsection
 
 @section('content')
-    @php
-        use \Illuminate\Support\Facades\Session;
-        $user = Session::get('user');
-    @endphp
 
     @if(count($cartItems)==0)
         <h3>В корзине ничего нет.</h3>
         <p>Судя по всему вы нищеброд :))</p>
     @else
+        <div>
+            <a href="/purchases/make" class="btn btn-primary">Buy All Products</a>
+        </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         @foreach($cartItems as $cartItem)
             @php $product = $cartItem->product; @endphp
@@ -25,7 +24,7 @@
                             <small class="text-muted">${{$product->price}}</small>
                         </div>
                         <div class="mt-2">
-                            <button class="btn btn-danger" onclick="buttonDeleteClick({{$cartItem->id}},{{$user->id}})">Delete</button>
+                            <button class="btn btn-danger" onclick="buttonDeleteClick({{$cartItem->id}})">Delete</button>
                         </div>
                     </div>
                 </div>

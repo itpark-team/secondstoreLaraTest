@@ -1,4 +1,17 @@
-function buttonAddClick(productId, userId) {
+function getCountItemsByUserId() {
+    $.ajax({
+        url: "/cart/getCountItemsForUser",
+        type: "POST",
+        data: {"_token": $('meta[name="csrf-token"]').attr('content')},
+
+        success: function (data) {
+            $("#cartCountItems")[0].innerHTML = "(кол-во товаров: "+data+")";
+        },
+
+    });
+}
+
+function buttonAddClick(productId) {
     $.ajax({
         url: "/cart/add/"+productId,
         type: "POST",
@@ -7,7 +20,7 @@ function buttonAddClick(productId, userId) {
         success: function (data) {
             alert("Успешно добавлено в корзину");
 
-            getCountItemsByUserId(userId);
+            getCountItemsByUserId();
         },
 
         error: function (msg) {
@@ -16,7 +29,7 @@ function buttonAddClick(productId, userId) {
     });
 }
 
-function buttonDeleteClick(id, userId) {
+function buttonDeleteClick(id) {
     $.ajax({
         url: "/cart/delete/"+id,
         type: "POST",
@@ -27,7 +40,7 @@ function buttonDeleteClick(id, userId) {
             $(cartId)[0].remove();
             alert("Успешно удалено из корзины");
 
-            getCountItemsByUserId(userId);
+            getCountItemsByUserId();
         },
 
         error: function (msg) {
@@ -37,18 +50,4 @@ function buttonDeleteClick(id, userId) {
 }
 
 
-function getCountItemsByUserId(userId) {
-    $.ajax({
-        url: "/cart/getCountItems/"+userId,
-        type: "POST",
-        data: {"_token": $('meta[name="csrf-token"]').attr('content')},
 
-        success: function (data) {
-            $("#cartCountItems")[0].innerHTML = "(кол-во товаров: "+data+")";
-        },
-
-        error: function (msg) {
-            alert("Ошибка удаления из корзины: "+msg.responseJSON.message);
-        }
-    });
-}
